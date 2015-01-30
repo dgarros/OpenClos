@@ -146,7 +146,8 @@ class L3ClosMediation():
                 # find match by role/id/name
                 if device.role == role and (device.id == inv.get('id') or device.name == inv['name']):
                     if device.deployStatus == inv.get('deployStatus'):
-                        logger.debug("Pod[id='%s', name='%s']: %s device '%s' unchanged" % (pod.id, pod.name, device.role, device.name))
+                        logger.debug("Pod[id='%s', name='%s']: %s device '%s' role unchanged" % (pod.id, pod.name, device.role, device.name))
+                        device.update(inv['name'], inv.get('username'), inv.get('password'), inv.get('macAddress'), inv.get('deployStatus'))
                     elif device.deployStatus == 'deploy' and inv.get('deployStatus') is None:
                         logger.debug("Pod[id='%s', name='%s']: %s device '%s' provisioned" % (pod.id, pod.name, device.role, device.name))
                         device.update(inv['name'], inv.get('username'), inv.get('password'), inv.get('macAddress'), inv.get('deployStatus', 'provision'))
